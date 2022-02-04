@@ -15,11 +15,20 @@ public class Main {
         Tools[] tools = Tools.values();
         ToolUses[] toolUses = ToolUses.values();
 
+        // Weapons
+        WeaponTypes[] weaponTypes = WeaponTypes.values();
+        WeaponNames[] weaponNames = WeaponNames.values();
+
+        // Potions
+        Potions[] potionNames = Potions.values();
+        PotionTypes[] potionTypes = PotionTypes.values();
+        PotionPurchases[] potionPurchases = PotionPurchases.values();
+
         System.out.print("How many items do you want: ");
         int itemCnt = Integer.parseInt(scan.nextLine());
 
         for(int i=0; i<itemCnt; i++) {
-            int type = ran.nextInt(2);
+            int type = ran.nextInt(4);
             switch (type) {
                 case 0 -> {
                     int foodIndex = ran.nextInt(foodItems.length);
@@ -39,6 +48,27 @@ public class Main {
                     String use = toolUses[toolIndex].toString();
                     Tool tmpTool = new Tool(toolName, toolPrice, toolQty, use);
                     items.add(tmpTool);
+                }
+                case 2 -> {
+                    int weaponIndex = ran.nextInt(weaponNames.length);
+                    String weaponName = weaponNames[weaponIndex].toString();
+                    float weaponPrice = ran.nextFloat(1000);
+                    int weaponQty = ran.nextInt(15);
+                    String weaponType = weaponTypes[weaponIndex].toString();
+                    float hitPoint = ran.nextFloat(50);
+                    Weapon tmpWeapon = new Weapon(weaponName, weaponPrice, weaponQty, weaponType, hitPoint);
+                    items.add(tmpWeapon);
+                }
+                case 3 -> {
+                    int potionIndex = ran.nextInt(potionNames.length);
+                    String potionName = potionNames[potionIndex].toString();
+                    float potionPrice = ran.nextFloat(15);
+                    int potionQty = ran.nextInt(15);
+                    String potionType = potionTypes[potionIndex].toString();
+                    String potionPurchase = potionPurchases[potionIndex].toString();
+                    float returnSale = potionPrice / 2;
+                    Potion tmpPotion = new Potion(potionName, potionPrice, potionQty, potionType, potionPurchase, returnSale);
+                    items.add(tmpPotion);
                 }
             }
         }
