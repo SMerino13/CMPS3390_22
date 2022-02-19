@@ -2,10 +2,13 @@ package a3.smerino.contactsapp;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -13,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ListViewController {
@@ -23,6 +27,11 @@ public class ListViewController {
     GridPane newContact;
     @FXML
     TextField txtFirstName, txtLastName, txtPhone;
+
+    @FXML
+    VBox vboxMain;
+    @FXML
+    MenuItem btnThemeDefault, btnThemeBlue, btnThemeDark;
 
     ContactComparator comparator = new ContactComparator();
 
@@ -45,7 +54,7 @@ public class ListViewController {
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } ;
+        }
     }
 
     @FXML
@@ -92,12 +101,28 @@ public class ListViewController {
     }
 
     @FXML
+    protected void onThemeChange(final ActionEvent event){
+        String defaultCSS = Objects.requireNonNull(getClass().getResource("Default.css")).toString();
+        String blueCSS = Objects.requireNonNull(getClass().getResource("Blue.css")).toString();
+        String darkCSS = Objects.requireNonNull(getClass().getResource("Dark.css")).toString();
+        vboxMain.getScene().getStylesheets().removeAll(defaultCSS, blueCSS, darkCSS);
+
+        Object source = event.getSource();
+        if (btnThemeDefault.equals(source)) {
+            vboxMain.getScene().getStylesheets().add(defaultCSS);
+        } else if (btnThemeBlue.equals(source)) {
+            vboxMain.getScene().getStylesheets().add(blueCSS);
+        } else if (btnThemeDark.equals(source)){
+            vboxMain.getScene().getStylesheets().add(darkCSS);
+        }
+    }
+
+    @FXML
     protected void onDeleteContact(){
         Contact selectedContact = contactsList.getSelectionModel().getSelectedItem();
         if(selectedContact != null){
             contacts.remove(selectedContact);
         }
-
     }
 
     public void setNewContactVis(Boolean vis){
