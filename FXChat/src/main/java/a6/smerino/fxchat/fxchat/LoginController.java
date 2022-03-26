@@ -29,7 +29,7 @@ public class LoginController {
         if(!validateForm())  return;
 
         try {
-            Socket socket = new Socket("odin.cs.csub.edu", 3390);
+            Socket socket = new Socket("odin.cs.csubak.edu", 3390);
             Client client = new Client(socket, txtUserName.getText());
             client.sendMessage(txtUserName.getText());
             openChatView(client);
