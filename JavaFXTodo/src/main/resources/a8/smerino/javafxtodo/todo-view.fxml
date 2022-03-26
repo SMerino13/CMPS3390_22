@@ -4,12 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a8.smerino.javafxtodo.TodoController">
+<VBox prefHeight="400.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="a8.smerino.javafxtodo.TodoController">
    <children>
       <TabPane fx:id="tabLists" maxHeight="35.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="NEVER">
         <tabs>
           <Tab onSelectionChanged="#onTabChanged" text="Home" />
           <Tab onSelectionChanged="#onTabChanged" text="School" />
+          <Tab onSelectionChanged="#onTabChanged" text="Work" />
+          <Tab onSelectionChanged="#onTabChanged" text="Groceries" />
         </tabs>
       </TabPane>
       <ListView fx:id="listItems" onMouseClicked="#onItemClicked" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
