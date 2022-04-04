@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1063554824840",
+    "firebase_url": "https://javafxtodo-c431b-default-rtdb.firebaseio.com",
+    "project_id": "javafxtodo-c431b",
+    "storage_bucket": "javafxtodo-c431b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063554824840:android:6cd8012d0248973b7fbd3d",
+        "android_client_info": {
+          "package_name": "a9.smerino.mobiletodo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063554824840-vhake4288sd74g3o2tb5abjs72spkb3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIwhYy_9P3MJj0SnspOVHweUkWoia21KE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063554824840-vhake4288sd74g3o2tb5abjs72spkb3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
