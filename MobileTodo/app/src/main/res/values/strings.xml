@@ -2,7 +2,9 @@
     <string name="app_name">MobileTodo</string>
     <string name="home">Home</string>
     <string name="school">School</string>
-    <string name="Work">Work</string>
+    <string name="work">Work</string>
+    <string name="groceries">Groceries</string>
+    <string name="personal">Personal</string>
     <string name="add">Add</string>
     <string name="todo_item">Todo Item</string>
 </resources>

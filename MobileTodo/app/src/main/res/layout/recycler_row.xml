@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:layout_weight="1"
-        app:cardBackgroundColor="#BFEAEF"
+        app:cardBackgroundColor="#BA00FF"
         app:cardCornerRadius="14dp"
         app:cardElevation="2dp"
         app:contentPadding="8dp">
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="9"
             android:text="TextView"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
     </androidx.cardview.widget.CardView>
 
