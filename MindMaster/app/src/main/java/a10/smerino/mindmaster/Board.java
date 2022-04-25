@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,24 +18,38 @@ public class Board {
     private final int pegRad;
     private final int rowVertSpace;
     private final int rowYOffset;
+    private int curRow = 0;
+    private PlayButton playButton;
+    private final List<Integer> solutionList = new ArrayList<>();
 
     private Bitmap background;
     public Board(Point screenSize, Resources resources){
         background = BitmapFactory.decodeResource(resources, R.drawable.board);
-        background = Bitmap.createScaledBitmap(background, (int)(screenSize.y * 0.66), screenSize.y, true);
+
+//        background = Bitmap.createScaledBitmap(background, (int)(screenSize.y * 0.66), screenSize.y, true);
+        if(screenSize.y * 0.63f > screenSize.x){
+            background = Bitmap.createScaledBitmap(background, screenSize.x, (int)(screenSize.x * 1.63f), true);
+        } else{
+            background = Bitmap.createScaledBitmap(background, (int)(screenSize.y * 0.63f), screenSize.y, true);
+        }
+
         boardXPos = screenSize.x / 2 - background.getWidth() /2;
-        pegRad = background.getHeight() / 30;
-        rowVertSpace = background.getHeight() / 11;
-        rowYOffset = background.getHeight() / 15;
+        pegRad = Math.round(background.getHeight() / 35f);
+        rowYOffset = Math.round(pegRad + background.getHeight() / 30f);
+        rowVertSpace = Math.round(pegRad + (background.getHeight() / 14.7f));
         generatePegs();
+        Point tmp = new Point();
+        tmp.x = Math.round(pegList.get(curRow * 4 + 3).getPos().x + pegRad * 1.2f);
+        tmp.y = pegList.get(curRow * 4 + 3).getPos().y;
+        playButton = new PlayButton(tmp, Math.round(pegRad * 0.9f));
 
     }
 
     private void generatePegs() {
         for(int r=0; r<10; r++){
             for(int c=0; c<4; c++){
-                int pegX = pegRad * c * 3 + boardXPos + pegRad * 2;
-                int pegY = r * rowVertSpace + rowYOffset + r * 2;
+                int pegX = c * pegRad * 3 + boardXPos + pegRad * 2;
+                int pegY = rowYOffset + r * rowVertSpace;
                 Peg tmp = new Peg(0, pegRad, new Point(pegX, pegY));
                 pegList.add(tmp);
             }
@@ -42,7 +57,10 @@ public class Board {
 
         // Set Solution
         for (int i = pegList.size()-1; i>pegList.size()-5; i--){
-            pegList.get(i).setColor((int) (Math.random() * 5 + 1));
+            int tmp = (int)(Math.random() * 5  + 1);
+            //Add at 0th pos. Last 1 first, Second to last will get pushed over
+            solutionList.add(0, tmp);
+            pegList.get(i).setColor(tmp);
         }
     }
 
@@ -51,13 +69,33 @@ public class Board {
         for(Peg p : pegList){
             p.draw(canvas);
         }
+        playButton.draw(canvas);
 
     }
 
     public void onCLick(int x, int y){
         Point point = new Point(x,y);
-        for(Peg p : pegList){
-            p.isPegClicked(point);
+        for(int i = curRow*4; i < curRow *4+4; i++){
+            pegList.get(i).isPegClicked(point);
         }
+
+        if(playButton.isPlayButtonClicked(point)){
+            evaluateRow();
+        }
+    }
+
+    private void evaluateRow(){
+        // check answers against solution
+        List<Integer> rowList = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            rowList.add(pegList.get(curRow * 4 + i).selectedPaint);
+        }
+        // advance the current row
+        advanceCurrentRow();
+    }
+
+    private void advanceCurrentRow() {
+        curRow++;
+        playButton.moveDown(rowVertSpace);
     }
 }
