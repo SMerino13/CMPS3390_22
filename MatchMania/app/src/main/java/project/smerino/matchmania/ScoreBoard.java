@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,10 +28,11 @@ import java.util.Iterator;
 public class ScoreBoard extends AppCompatActivity {
 
     private RecyclerView listScores;
+    private Button playAgain;
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<String> userScores = new ArrayList<>();
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private String score;
+    private String userInfo;
     private String head = "Scoreboard";
 
     @Override
@@ -37,21 +40,40 @@ public class ScoreBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_board);
 
+        playAgain = findViewById(R.id.playAgain);
+
         listScores = findViewById(R.id.listScores);
         listScores.setAdapter(new RecyclerAdapter(this, items));
         listScores.setLayoutManager(new LinearLayoutManager(this));
 
         Intent intent = getIntent();
-        score = intent.getExtras().getString("userName");
+        userInfo = intent.getExtras().getString("userName");
 
-        if(score.length() > 0){
-            Item tmp = new Item(score);
+        if(userInfo.length() > 0){
+            Item tmp = new Item(userInfo);
             addScore(tmp);
+        } else {
+            // Only show play again button when player has completed the game
+            playAgain.setVisibility(View.INVISIBLE);
         }
 
         getScores();
 
 
+    }
+
+    public void onPlayAgain(View view){
+        String[] infoSplit = userInfo.split(":");
+        String userName = infoSplit[0];
+        Intent intent = new Intent(this, MatchMania.class);
+        intent.putExtra("userName", userName);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     //________________________//
@@ -78,6 +100,8 @@ public class ScoreBoard extends AppCompatActivity {
                     Item tmp = new Item(val.get("desc").toString());
                     items.add(tmp);
                 }
+                //remove any duplicate users
+                checkDuplicates();
                 // Order the scores
                 orderScores();
 
@@ -91,8 +115,37 @@ public class ScoreBoard extends AppCompatActivity {
         });
     }
 
+    private void checkDuplicates() {
+        String extract, userName, tmpUserName, score1, score2;
+        String[] infoSplit;
+        ArrayList<Integer> userScores = new ArrayList<>();
+        for(int i=0; i < items.size() - 1; i++){
+            extract = items.get(i).toString();
+            infoSplit = extract.split(":");
+            userName = infoSplit[0];
+            score1 = extract.replaceAll("\\D+","");
+            userScores.add(Integer.parseInt(score1));
+
+            for(int j=i+1; j < items.size(); j++) {
+                extract = items.get(j).toString();
+                infoSplit = extract.split(":");
+                tmpUserName = infoSplit[0];
+                score2 = extract.replaceAll("\\D+", "");
+
+                if(userName.equals(tmpUserName)){
+                    userScores.add(Integer.parseInt(score2));
+                    if(userScores.get(0) < userScores.get(1)) {
+                        items.remove(j);
+                    } else{
+                        items.remove(i);
+                    }
+                }
+            }
+            userScores.clear();
+        }
+    }
+
     // Order the scores based on attempts
-    // If you are seeing this, I apologies this could've been done alot better
     private void orderScores() {
         String extract, temp, string1, string2;
         Item tmpi, tmpj, tmpk;

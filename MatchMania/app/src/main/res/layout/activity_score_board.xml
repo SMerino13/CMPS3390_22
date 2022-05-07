@@ -22,15 +22,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="250dp"
         android:paddingTop="24dp"
-        android:paddingRight="250dp"
         android:text="@string/scoreboard"
         android:textColor="#F9A825"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/listScores"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/scoreboard" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listScores"
@@ -39,11 +40,25 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="16dp"
         android:paddingTop="24dp"
         android:paddingBottom="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/playAgain"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/playAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#F9A825"
+        android:onClick="onPlayAgain"
+        android:text="@string/playagain"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/listScores"
+        app:layout_constraintStart_toStartOf="@+id/listScores" />
 </androidx.constraintlayout.widget.ConstraintLayout>
