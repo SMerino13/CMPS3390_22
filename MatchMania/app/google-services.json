@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "24560554411",
+    "firebase_url": "https://match-mania-scoreboard-default-rtdb.firebaseio.com",
+    "project_id": "match-mania-scoreboard",
+    "storage_bucket": "match-mania-scoreboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24560554411:android:5dd2fe43b6c0f9a3ca82ee",
+        "android_client_info": {
+          "package_name": "project.smerino.matchmania"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24560554411-vvtk1ghqb2caq8abd85cbcttd7qa9okn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeUKUe9piItBH48LoZInOBnbOlz_a9xGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24560554411-vvtk1ghqb2caq8abd85cbcttd7qa9okn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

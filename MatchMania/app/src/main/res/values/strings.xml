@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MatchMania</string>
+    <string name="play">Play</string>
+    <string name="scoreboard">Scoreboard</string>
+    <string name="logo">Logo</string>
+    <string name="username">Username</string>
+    <string name="score">Score</string>
+
+</resources>
