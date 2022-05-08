@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder>{
-    private List<Item> items;
+    private List<Scores> scores;
     private Context context;
 
-    public RecyclerAdapter(Context context, List<Item> items) {
-        this.items = items;
+    public RecyclerAdapter(Context context, List<Scores> scores) {
+        this.scores = scores;
         this.context = context;
     }
 
@@ -30,12 +30,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtItem.setText(items.get(position).getDesc());
+        holder.txtItem.setText(scores.get(position).getDesc());
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return scores.size();
     }
 
 

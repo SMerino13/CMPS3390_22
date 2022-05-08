@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F9A825"
     android:orientation="vertical"
     android:weightSum="2"
     tools:context=".MatchMania">
@@ -13,15 +14,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:background="#F9A825"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
+        android:paddingRight="16dp"
         android:text="@string/username"
-        android:textSize="20dp" />
+        android:textColor="#3F00FF"
+        android:textSize="20dp"
+        android:textStyle="bold|italic" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="267dp"
-        android:layout_weight="0"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#F9A825"
         android:orientation="horizontal"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
@@ -32,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -44,7 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#7AE1E1E1"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -56,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -68,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -80,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -92,8 +97,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="254dp"
-        android:layout_weight="0"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#F9A825"
+        android:backgroundTint="#F9A825"
         android:orientation="horizontal"
         android:paddingTop="0dp"
         android:paddingBottom="0dp"
@@ -105,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -117,7 +124,7 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -129,7 +136,7 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -141,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -153,7 +160,7 @@
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:layout_weight="1"
-            android:background="#F3F3F3"
+            android:background="#F9A825"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -167,11 +174,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:background="#4485BF"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="Attempts remianing: "
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
 
 </LinearLayout>

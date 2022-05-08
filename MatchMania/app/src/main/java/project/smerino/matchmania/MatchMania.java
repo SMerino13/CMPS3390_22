@@ -9,14 +9,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Arrays;
 import java.util.Collections;
 
 
 public class MatchMania extends AppCompatActivity {
 
-    ImageView[] IMGS = new ImageView[10];
-    String userName;
+    private ImageView[] IMGS = new ImageView[10];
+    private String userName;
 
     TextView score, passedUser;
 
@@ -29,8 +32,8 @@ public class MatchMania extends AppCompatActivity {
     private int firstClick, secondClick;
     private int cardNum = 1;
     private int currScore = 0;
-    private int attempts = 15;
-    private int limit = 15;
+    private int attempts = 10;
+    private int limit = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,7 +199,7 @@ public class MatchMania extends AppCompatActivity {
         } else if (cardNum == 2){
             secondCard = cards[card];
             attempts--;
-            score.setText("Attempts remaining: " + attempts);
+            score.setText("Attempts remaining: " + attempts + "  ");
             if(secondCard > 20){
                 secondCard = secondCard - 10;
             }
@@ -214,7 +217,7 @@ public class MatchMania extends AppCompatActivity {
                 public void run() {
                     calculate();
                 }
-            }, 1500);
+            }, 1200);
         }
     }
 
@@ -279,7 +282,8 @@ public class MatchMania extends AppCompatActivity {
 
         // SWITCH TO MAIN MENU IF ACTIVITY IS FINISHED
         if(attempts == 0){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = getIntent();
+            finish();
             startActivity(intent);
         }
 

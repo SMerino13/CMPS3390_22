@@ -1,9 +1,9 @@
 package project.smerino.matchmania;
 
-public class Item {
+public class Scores {
     private final String desc;
 
-    public Item(String desc){
+    public Scores(String desc){
         this.desc = desc;
     }
 
