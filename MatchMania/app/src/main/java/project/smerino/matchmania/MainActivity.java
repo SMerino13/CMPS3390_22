@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onPlayClicked(View view){
+        // Usernames can only contain characters
         String userName = txtUserName.getText().toString();
         boolean valid = userName.matches("^\\w{3,13}[a-zA-Z]$");
         if(valid){
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onScoreClicked(View view){
+        // User must be log in and play before attempting to view scoreboard
         FirebaseUser user = auth.getCurrentUser();
         if(user != null) {
             Intent intent = new Intent(this, ScoreBoard.class);

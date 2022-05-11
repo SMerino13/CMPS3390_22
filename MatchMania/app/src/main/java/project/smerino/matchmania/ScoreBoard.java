@@ -29,12 +29,15 @@ public class ScoreBoard extends AppCompatActivity {
 
     private RecyclerView listScores;
     private Button playAgain;
+
     private ArrayList<Scores> scores = new ArrayList<>();
     private ArrayList<String> userScores = new ArrayList<>();
+
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseAuth auth;
+
     private String userInfo;
     private String head = "Scoreboard";
-    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,21 +45,25 @@ public class ScoreBoard extends AppCompatActivity {
         setContentView(R.layout.activity_score_board);
 
         playAgain = findViewById(R.id.playAgain);
-
         listScores = findViewById(R.id.listScores);
+
         listScores.setAdapter(new RecyclerAdapter(this, scores));
         listScores.setLayoutManager(new LinearLayoutManager(this));
 
+        // Retrieve User Info
         Intent intent = getIntent();
         userInfo = intent.getExtras().getString("userName");
 
+        // Get Firebase Authentication instance
         auth = FirebaseAuth.getInstance();
 
+        // Only users who come from Match Mania Activity enter with a userName and a score
+        // Add score to firebase
         if(userInfo.length() > 0){
             Scores tmp = new Scores(userInfo);
             addScore(tmp);
         } else {
-            // Only show play again button when player has completed the game
+            // Users who come from Main Activity do not have a userName yet, hide "Play Again" Btn
             playAgain.setVisibility(View.INVISIBLE);
         }
 
@@ -66,15 +73,12 @@ public class ScoreBoard extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         FirebaseUser user = auth.getCurrentUser();
-
-        // message to log in to view scoreboard
-
-        // get scores
         getScores();
     }
 
-
     public void onPlayAgain(View view){
+        //If user clicks play again, grab the userName from their info (contains username and score)
+        // Add username as extra and start Match Mania Activity
         String[] infoSplit = userInfo.split(":");
         String userName = infoSplit[0];
         Intent intent = new Intent(this, MatchMania.class);
@@ -84,12 +88,11 @@ public class ScoreBoard extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        auth.signOut();
+        auth.signOut(); // Sign out if user clicks the back activity
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    //________________________//
     private void addScore(Scores scores){
         try {
             String path = URLEncoder.encode(scores.getDesc(), String.valueOf(StandardCharsets.UTF_8));
@@ -128,6 +131,7 @@ public class ScoreBoard extends AppCompatActivity {
         });
     }
 
+    // Check if user already has a score and only show the best attempt (lower attempts = better)
     private void checkDuplicates() {
         String extract, userName, tmpUserName, score1, score2;
         String[] infoSplit;

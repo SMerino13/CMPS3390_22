@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#F9A825"
     android:orientation="vertical"
     android:weightSum="2"
@@ -20,12 +20,12 @@
         android:paddingRight="16dp"
         android:text="@string/username"
         android:textColor="#3F00FF"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold|italic" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="#F9A825"
         android:orientation="horizontal"
@@ -39,9 +39,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -50,9 +54,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -62,9 +70,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -74,9 +86,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -86,9 +102,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -97,7 +117,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="#F9A825"
         android:backgroundTint="#F9A825"
@@ -113,9 +133,13 @@
             android:layout_height="220dp"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -125,6 +149,8 @@
             android:layout_height="220dp"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
             android:src="@drawable/blueback">
@@ -137,9 +163,13 @@
             android:layout_height="220dp"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -149,9 +179,13 @@
             android:layout_height="220dp"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -161,9 +195,13 @@
             android:layout_height="220dp"
             android:layout_weight="1"
             android:background="#F9A825"
+            android:contentDescription="@string/blue_back"
+            android:onClick="onClickImage"
             android:scaleType="center"
             android:scrollbarTrackVertical="@drawable/blueback"
-            android:src="@drawable/blueback">
+            android:src="@drawable/blueback"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintWidth_percent="0.25">
 
         </ImageView>
 
@@ -171,15 +209,17 @@
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="#4485BF"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
+        android:paddingRight="16dp"
         android:paddingBottom="16dp"
-        android:text="Attempts remianing: "
-        android:textSize="20dp"
+        android:text="@string/attempts_remaining"
+        android:textColor="#263238"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 

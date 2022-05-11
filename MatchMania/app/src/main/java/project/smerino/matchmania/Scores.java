@@ -1,5 +1,6 @@
 package project.smerino.matchmania;
 
+// Identical copy of items class for Andriod Chat
 public class Scores {
     private final String desc;
 

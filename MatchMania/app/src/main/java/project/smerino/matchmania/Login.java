@@ -21,8 +21,8 @@ public class Login extends AppCompatActivity {
 
     private TextView userEmail, userPassword;
     private Button loginBtn;
-    private FirebaseAuth auth;
     private String userName;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +32,11 @@ public class Login extends AppCompatActivity {
         userEmail = (TextView) findViewById(R.id.userEmail);
         userPassword = (TextView) findViewById(R.id.userPassword);
         loginBtn = findViewById(R.id.loginBtn);
+
+        // Get instance
         auth = FirebaseAuth.getInstance();
 
+        // Retrieve userName from Main Activity so it can be passed to Match Mania Activity
         Intent intent = getIntent();
         userName = intent.getExtras().getString("userName");
 
@@ -41,8 +44,10 @@ public class Login extends AppCompatActivity {
 
     }
 
+    // Check if user is logged in already
     public void checkLoginStatus(){
         FirebaseUser user = auth.getCurrentUser();
+        // if user is already logged in, go to Match Mania Activity
         if(user != null){
             Intent intent = new Intent(Login.this, MatchMania.class);
             intent.putExtra("userName", userName);
@@ -51,11 +56,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void onClickedLogin(View view){
+        // Retrieve credentials
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
 
-        System.out.println(email + " " + password);
-
+        // Check if fields are empty
         if (TextUtils.isEmpty(email)){
             userEmail.setError("Enter an email");
             userEmail.requestFocus();
@@ -63,7 +68,9 @@ public class Login extends AppCompatActivity {
             userPassword.setError("Enter a password");
             userPassword.requestFocus();
         } else {
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            // Attempt to login
+            auth.signInWithEmailAndPassword(email, password).
+                    addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){

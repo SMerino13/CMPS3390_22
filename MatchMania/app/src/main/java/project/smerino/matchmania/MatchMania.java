@@ -9,23 +9,22 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.util.Arrays;
 import java.util.Collections;
 
 
 public class MatchMania extends AppCompatActivity {
 
+    // Image View Array will hold all blue card id's
     private ImageView[] IMGS = new ImageView[10];
     private String userName;
 
     TextView score, passedUser;
 
-    // card array
-    Integer[] cards = {11, 12, 13, 14, 15, 21, 22, 23, 24, 25};
-    //images
+    // Integer equivalent for cards in each row
+    Integer[] cards = {11, 12, 13, 14, 15,
+            21, 22, 23, 24, 25};
+    // Ints to hold front card image resources.
     private int img11, img12, img13, img14, img15, img21, img22, img23, img24, img25;
 
     private int firstCard, secondCard;
@@ -45,7 +44,6 @@ public class MatchMania extends AppCompatActivity {
         setContentView(R.layout.activity_match_mania);
 
         score = (TextView) findViewById(R.id.score);
-
         passedUser = (TextView) findViewById(R.id.passedUser);
         passedUser.setText("Current Player: " + userName);
 
@@ -60,107 +58,27 @@ public class MatchMania extends AppCompatActivity {
         IMGS[8] = (ImageView) findViewById(R.id.back9);
         IMGS[9] = (ImageView) findViewById(R.id.back10);
 
+        // Tag represents card number to ID them
         for(int i = 0; i < 10; i++) {
             IMGS[i].setTag(String.valueOf(i));
         }
 
-        // Load cards
+        // Load front facing cards
         frontCards();
 
+        // Shuffle the order of the front facing cards
         Collections.shuffle(Arrays.asList(cards));
-
-        IMGS[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[0], imgNum);
-                checkImage(IMGS[0], imgNum);
-            }
-        });
-
-        IMGS[1].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[1], imgNum);
-                checkImage(IMGS[1], imgNum);
-            }
-        });
-
-        IMGS[2].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[2], imgNum);
-                checkImage(IMGS[2], imgNum);
-            }
-        });
-
-        IMGS[3].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[3], imgNum);
-                checkImage(IMGS[3], imgNum);
-            }
-        });
-
-        IMGS[4].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[4], imgNum);
-                checkImage(IMGS[4], imgNum);
-            }
-        });
-
-        IMGS[5].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[5], imgNum);
-                checkImage(IMGS[5], imgNum);
-            }
-        });
-
-        IMGS[6].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[6], imgNum);
-                checkImage(IMGS[6], imgNum);
-            }
-        });
-
-        IMGS[7].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[7], imgNum);
-                checkImage(IMGS[7], imgNum);
-            }
-        });
-
-        IMGS[8].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[8], imgNum);
-                checkImage(IMGS[8], imgNum);
-            }
-        });
-
-        IMGS[9].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int imgNum = Integer.valueOf((String) v.getTag());
-                setFrontCard(IMGS[9], imgNum);
-                checkImage(IMGS[9], imgNum);
-            }
-        });
 
     }
 
+    // On Click Method for all Image Views
+    public void onClickImage(View view) {
+        int imgNum = Integer.valueOf((String) view.getTag());
+        setFrontCard(IMGS[imgNum], imgNum);
+        checkImage(IMGS[imgNum], imgNum);
+    }
+
+    // set corresponding front face to clicked card
     private void setFrontCard(ImageView view, int card){
         if(cards[card] == 11){
             view.setImageResource(img11);
@@ -186,20 +104,21 @@ public class MatchMania extends AppCompatActivity {
 
     }
 
+    // Check either the first or second card the user as selected
     private void checkImage(ImageView view, int card){
         if(cardNum == 1){
             firstCard = cards[card];
             if(firstCard > 20){
                 firstCard = firstCard - 10;
             }
-
             cardNum += 1;
             firstClick = card;
+            // Prevent user from clicking on the same card again
             view.setEnabled(false);
         } else if (cardNum == 2){
             secondCard = cards[card];
             attempts--;
-            score.setText("Attempts remaining: " + attempts + "  ");
+            score.setText("Attempts remaining: " + attempts + "  "); //Update the number of attempts
             if(secondCard > 20){
                 secondCard = secondCard - 10;
             }
@@ -211,17 +130,19 @@ public class MatchMania extends AppCompatActivity {
                 IMGS[i].setEnabled(false);
             }
 
+            // Delay gameplay and check if cards match
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    calculate();
+                    checkMatch();
                 }
             }, 1200);
         }
     }
 
-    private void calculate(){
+    // If cards match, hide them on activity
+    private void checkMatch(){
         if(firstCard == secondCard){
             if(firstClick == 0){
                 IMGS[0].setVisibility(View.INVISIBLE);
@@ -277,16 +198,18 @@ public class MatchMania extends AppCompatActivity {
                 IMGS[9].setVisibility(View.INVISIBLE);
             }
         } else{
+            // Flip cards back down
             resetCards();
         }
 
-        // SWITCH TO MAIN MENU IF ACTIVITY IS FINISHED
+        // If the user fails, relaunch activity
         if(attempts == 0){
             Intent intent = getIntent();
             finish();
             startActivity(intent);
         }
 
+        // User wins if they match all five cards
         if(currScore == 5){
             String score = userName + ": Attempts " + (limit - attempts);
             Intent intent = new Intent(this, ScoreBoard.class);
@@ -294,11 +217,16 @@ public class MatchMania extends AppCompatActivity {
             startActivity(intent);
         }
 
+        // Re-enable gameplay and allow user to click.
+        reEnableGame();
+
+    }
+
+    private void reEnableGame(){
         // Re-enable gameplay
         for(int i = 0; i < 10; i++) {
             IMGS[i].setEnabled(true);
         }
-
     }
 
     private void frontCards(){
