@@ -1,2 +1,2 @@
 # CMPS3390
-The following are completed programming assingments from my previous Application Developemnt course. 
+The following are completed programming assignments from my previous Application Development course.
